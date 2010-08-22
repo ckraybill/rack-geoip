@@ -1,0 +1,78 @@
+= Rack::Geoip
+
+A rack middleware component that handles simple geoip lookups.
+
+== Installation
+
+First you must have a GeoIP database installed. Currently the only backend support is the free one from
+MaxMind (http://www.maxmind.com). So you must first install the C api bindings.
+
+    $ wget http://geolite.maxmind.com/download/geoip/api/c/GeoIP.tar.gz
+    $ tar xzf GeoIP.tar.gz
+    $ cd GeoIP-1.4.6
+    $ ./configure && make && sudo make install
+
+To download the actual GeoLiteCity (free) database you can currently find it here (I like to place it in
+a data sub-directory).
+
+    $ cd data
+    $ wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
+    $ gunzip GeoLiteCity.dat.gz
+
+And finally install the gem
+
+    $ gem install rack-geoip
+    
+== Usage
+
+=== Basic Usage
+
+    require 'rack/geoip'
+    use Rack::Geoip
+    run app
+
+=== Using with Rails
+
+Add this to your config/environment.rb
+
+    config.gem 'rack-geoip'
+
+And then in an initializer block
+
+    config.middleware.use "Rack::Geoip",
+      :db => 'data/GeoLiteCity.dat',
+      :path => '/geoip/info'
+      
+=== Sample output
+
+    $ curl http://localhost:9292/lookup?ip=8.8.8.8
+    
+    { "area_code":650,
+      "city":"Mountain View",
+      "postal_code":"94043",
+      "country_code":"US",
+      "latitude":37.4192008972168,
+      "country_code3":"USA",
+      "longitude":-122.057403564453,
+      "country_name":"United States",
+      "dma_code":807,
+      "region":"CA" }
+
+== Note on Patches/Pull Requests
+ 
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Commit, do not mess with rakefile, version, or history.
+  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
+
+== Credits
+
+I want to acknowledge the work done by Geoffrey Grosenbach (http://peepcode.com) on the sinatra-geoip gem which was the
+inspiration for this.
+
+== License
+
+Rack::Geoip is Copyright (c) 2010 by Chris Kraybill and is provided under the MIT license. See COPYING for details.

@@ -1,0 +1,8 @@
+== Short Term
+
+* Document code better
+ 
+== Version bumps
+
+* Implement a backend interface to allow for different GeoIP backends
+* Country code support

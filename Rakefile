@@ -5,12 +5,14 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "rack-geoip"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{A rack middleware component that handles simple geoip lookups.}
+    gem.description = %Q{A rack middleware component that handles simple geoip lookups.}
     gem.email = "ckraybill@gmail.com"
     gem.homepage = "http://github.com/ckraybill/rack-geoip"
     gem.authors = ["Chris Kraybill"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
+    gem.add_dependency "geoip_city"
+    gem.add_dependency "json"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
@@ -40,6 +42,7 @@ Rake::RDocTask.new do |rdoc|
 
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "rack-geoip #{version}"
-  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('README*','COPYING')
   rdoc.rdoc_files.include('lib/**/*.rb')
+  rdoc.rdoc_files.include('TODO')
 end
