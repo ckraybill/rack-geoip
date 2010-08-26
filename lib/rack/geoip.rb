@@ -27,11 +27,6 @@ module Rack  #:nodoc:
   #       :db => 'data/GeoLiteCity.dat',
   #       :path => '/geoip/info'
   #
-  # === Sample output
-  #     $ curl http://localhost:9292/lookup?ip=8.8.8.8
-  #     {"area_code":650,"city":"Mountain View","postal_code":"94043","country_code":"US","latitude":37.4192008972168, \
-         "country_code3":"USA","longitude":-122.057403564453,"country_name":"United States","dma_code":807,"region":"CA"}
-  #
   module Geoip
     autoload :Lookup, 'rack/geoip/lookup'
   
