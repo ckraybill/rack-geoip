@@ -41,8 +41,9 @@ And then in an initializer block
 
     config.middleware.use "Rack::Geoip",
       :db => 'data/GeoLiteCity.dat',
-      :path => '/geoip/info'
-      
+      :path => '/geoip/info',
+      :db_lookup => :memory
+    
 === Sample output
 
     $ curl http://localhost:9292/lookup?ip=8.8.8.8
