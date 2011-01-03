@@ -5,11 +5,11 @@ module Rack::Geoip
   # Implements Rack's middleware interface and provides the geoip
   # lookup service
   class Lookup
-    DEFAULT =  {:path => '/geoip/lookup', :db => 'GeoLiteCity.dat'}
+    DEFAULT =  {:path => '/geoip/lookup', :db => 'GeoLiteCity.dat', :db_lookup => :memory}
 
     def initialize(app, options={})
       @app, @options = app, DEFAULT.merge(options)
-      @db = GeoIPCity::Database.new(@options[:db])
+      @db = GeoIPCity::Database.new(@options[:db], @options[:db_lookup])
     end
     
     def call(env)

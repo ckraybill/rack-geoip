@@ -25,7 +25,8 @@ module Rack  #:nodoc:
   # 
   #     config.middleware.use "Rack::Geoip",
   #       :db => 'data/GeoLiteCity.dat',
-  #       :path => '/geoip/info'
+  #       :path => '/geoip/info',
+  #       :db_lookup => :memory
   #
   module Geoip
     autoload :Lookup, 'rack/geoip/lookup'
