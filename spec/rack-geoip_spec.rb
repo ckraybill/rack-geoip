@@ -20,7 +20,7 @@ describe "RackGeoip" do
   it 'should return 404 when a geocode lookup request has malformed parameters' do
     get '/geocode/lookup'
     last_response.status.should == 404
-    last_response.body.should == 'Example usage: http:///geocode/lookup?ip=8.8.8.8'
+    last_response.body.should == 'Example usage: http://example.org/geocode/lookup?ip=8.8.8.8'
   end
   
   # This makes sure that the response is JSON parse-able
