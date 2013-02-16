@@ -11,18 +11,18 @@ module Rack::Geoip
       @app, @options = app, DEFAULT.merge(options)
       @db = GeoIPCity::Database.new(@options[:db], @options[:db_lookup])
     end
-    
+
     def call(env)
       dup._call(env)
     end
-    
+
     def _call(env)
       if env['PATH_INFO'] == @options[:path]
         request = Rack::Request.new(env)
         if request.params['ip'] && result=@db.look_up(request.params['ip'])
-          [200, {'Content-Type' => 'application/json'}, result.to_json]
+          [200, {'Content-Type' => 'application/json'}, [result.to_json]]
         else
-          [404, {'Content-Type' => 'text/plain'}, "Example usage: #{env['rack.url_scheme']}://#{env['HTTP_HOST']}#{env['PATH_INFO']}?ip=8.8.8.8"]
+          [404, {'Content-Type' => 'text/plain'}, ["Example usage: #{env['rack.url_scheme']}://#{env['HTTP_HOST']}#{env['PATH_INFO']}?ip=8.8.8.8"]]
         end
       else
         @app.call(env)

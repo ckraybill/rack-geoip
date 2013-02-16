@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require_relative "spec_helper"
 
 describe "RackGeoip" do
   def app
@@ -14,7 +14,7 @@ describe "RackGeoip" do
     last_response.should be_ok
     last_response.body.should == 'Hello World'
   end
-  
+
   # This makes sure that the middleware will return a 404 with some suggested usage
   # when the request is malformed
   it 'should return 404 when a geocode lookup request has malformed parameters' do
@@ -22,7 +22,7 @@ describe "RackGeoip" do
     last_response.status.should == 404
     last_response.body.should == 'Example usage: http://example.org/geocode/lookup?ip=8.8.8.8'
   end
-  
+
   # This makes sure that the response is JSON parse-able
   it 'should return some json when a geocode lookup works' do
     get '/geocode/lookup?ip=8.8.8.8'
@@ -30,7 +30,7 @@ describe "RackGeoip" do
     json = JSON.parse(last_response.body)
     json.class.should == Hash
   end
-  
+
   # This tests the actual geocode lookup
   it 'should return the city Mountain View when the provided IP lookup is for a googleplex' do
     get '/geocode/lookup?ip=8.8.8.8'
