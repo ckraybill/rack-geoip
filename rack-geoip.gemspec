@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'rack'
-  s.add_dependency 'geoip_city19', '>= 2.0.1'
+  s.add_dependency 'geoip_city19', '>= 2.0.2'
   s.add_dependency 'json'
 
   s.add_development_dependency 'rake'
